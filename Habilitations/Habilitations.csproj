@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bddmanager\BddManager.cs" />
+    <Compile Include="controller\FrmAuthentificationController.cs" />
     <Compile Include="controller\FrmHabilitationsController.cs" />
     <Compile Include="dal\Access.cs" />
     <Compile Include="dal\DeveloppeurAccess.cs" />
@@ -66,6 +67,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>habilitationsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="model\Admin.cs" />
+    <Compile Include="view\FrmAuthentification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FrmAuthentification.Designer.cs">
+      <DependentUpon>FrmAuthentification.cs</DependentUpon>
     </Compile>
     <Compile Include="view\FrmHabilitations.cs">
       <SubType>Form</SubType>
@@ -86,6 +94,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\FrmAuthentification.resx">
+      <DependentUpon>FrmAuthentification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\FrmHabilitations.resx">
       <DependentUpon>FrmHabilitations.cs</DependentUpon>
     </EmbeddedResource>
