@@ -7,7 +7,7 @@ namespace Habilitations.controller
     /// <summary>
     /// Contrôleur de FrmAuthentification
     /// </summary>
-    class FrmAuthentificationController
+    public class FrmAuthentificationController
     {
         /// <summary>
         /// objet d'accès aux opérations possibles sur Developpeur
