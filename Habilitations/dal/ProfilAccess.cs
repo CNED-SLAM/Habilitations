@@ -37,11 +37,7 @@ namespace Habilitations.dal
                     List<Object[]> records = access.Manager.ReqSelect(req);
                     if (records != null)
                     {
-                        foreach (Object[] record in records)
-                        {
-                            Profil profil = new Profil((int)record[0], (string)record[1]);
-                            lesProfils.Add(profil);
-                        }
+                        lesProfils = records.ConvertAll(new Converter<Object[], Profil>(ConvertProfil));
                     }
                 }
                 catch (Exception e)
@@ -51,6 +47,16 @@ namespace Habilitations.dal
                 }
             }
             return lesProfils;
+        }
+
+        /// <summary>
+        /// Utilise les valeurs d'un tableau pour créer un objet de type Profil
+        /// </summary>
+        /// <param name="profil">tableau d'objets contenant les valeurs des champs du profil</param>
+        /// <returns>objet de type Profil</returns>
+        private Profil ConvertProfil(Object[] profil)
+        {
+            return new Profil((int)profil[0], (string)profil[1]);
         }
 
     }
