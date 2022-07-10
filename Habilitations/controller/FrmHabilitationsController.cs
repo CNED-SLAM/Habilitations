@@ -1,6 +1,7 @@
 ﻿using Habilitations.dal;
 using Habilitations.model;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Habilitations.controller
 {
@@ -79,6 +80,30 @@ namespace Habilitations.controller
         public void UpdatePwd(Developpeur developpeur)
         {
             developpeurAccess.UpdatePwd(developpeur);
+        }
+
+        /// <summary>
+        /// Conrtôle si le pwd respecte les règles :
+        /// au moins une minuscule, une majuscule, un chiffre, un caractère spécial, pas d'espace
+        /// et longueur entre 8 et 30 caractères
+        /// </summary>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public bool PwdFort(string pwd)
+        {
+            if (pwd.Length < 8 && pwd.Length > 30)
+                return false;
+            if (!Regex.Match(pwd, @"[a-z]").Success)
+                return false;
+            if (!Regex.Match(pwd, @"[A-Z]").Success)
+                return false;
+            if (!Regex.Match(pwd, @"[0-9]").Success)
+                return false;
+            if (!Regex.Match(pwd, @"\W").Success)
+                return false;
+            if (Regex.Match(pwd, @"\s").Success)
+                return false;
+            return true;
         }
 
     }

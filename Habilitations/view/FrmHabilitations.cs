@@ -192,10 +192,17 @@ namespace Habilitations.view
         {
             if (!txtPwd1.Text.Equals("") && !txtPwd2.Text.Equals("") && txtPwd1.Text.Equals(txtPwd2.Text))
             {
-                Developpeur developpeur = (Developpeur)bdgDeveloppeurs.List[bdgDeveloppeurs.Position];
-                developpeur.Pwd = txtPwd1.Text;
-                controller.UpdatePwd(developpeur);
-                EnCoursModifPwd(false);
+                if (controller.PwdFort(txtPwd1.Text))
+                {
+                    Developpeur developpeur = (Developpeur)bdgDeveloppeurs.List[bdgDeveloppeurs.Position];
+                    developpeur.Pwd = txtPwd1.Text;
+                    controller.UpdatePwd(developpeur);
+                    EnCoursModifPwd(false);
+                }
+                else
+                {
+                    MessageBox.Show("le pwd doit contenir entre 8 et 30 caractères constitués de : au moins une minuscule, une majuscule, un chiffre, un caractère spécial et pas d'espace", "Information");
+                }
             }
             else
             {
