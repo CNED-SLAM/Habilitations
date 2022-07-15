@@ -1,5 +1,6 @@
 ﻿using Habilitations.bddmanager;
 using System;
+using Serilog;
 
 namespace Habilitations.dal
 {
@@ -29,10 +30,16 @@ namespace Habilitations.dal
         {
             try
             {
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Verbose()
+                    .WriteTo.Console()
+                    .WriteTo.File("logs/log.txt")
+                    .CreateLogger();
                 Manager = BddManager.GetInstance(connectionString);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Fatal("Access.Access catch connectionString={0} erreur={1}", connectionString, e.Message);
                 Environment.Exit(0);
             }
         }

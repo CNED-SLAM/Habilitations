@@ -1,6 +1,7 @@
 ﻿using Habilitations.model;
 using System;
 using System.Collections.Generic;
+using Serilog;
 
 namespace Habilitations.dal
 {
@@ -37,8 +38,10 @@ namespace Habilitations.dal
                     List<Object[]> records = access.Manager.ReqSelect(req);
                     if (records != null)
                     {
+                        Log.Debug("ProfilAccess.GesLesProfils nb records = {0}", records.Count);
                         foreach (Object[] record in records)
                         {
+                            Log.Debug("ProfilAccess.GestLesProfils id={0} nom={1}", record[0], record[1]);
                             Profil profil = new Profil((int)record[0], (string)record[1]);
                             lesProfils.Add(profil);
                         }
@@ -47,6 +50,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("ProfilAccess.GetLesProfils catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }

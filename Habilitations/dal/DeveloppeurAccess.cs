@@ -1,6 +1,7 @@
 ﻿using Habilitations.model;
 using System;
 using System.Collections.Generic;
+using Serilog;
 
 namespace Habilitations.dal
 {
@@ -50,6 +51,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.ControleAuthentification catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
@@ -73,8 +75,11 @@ namespace Habilitations.dal
                     List<Object[]> records = access.Manager.ReqSelect(req);
                     if (records != null)
                     {
+                        Log.Debug("DeveloppeurAccess.GetLesDeveloppeurs nb records = {0}", records.Count);
                         foreach (Object[] record in records)
                         {
+                            Log.Debug("DeveloppeurAccess.GetLesDeveloppeurs Profil : id={0} nom={1}", record[5], record[6]);
+                            Log.Debug("DeveloppeurAccess.GetLesDeveloppeurs Developpeur : id={0} nom={1} prenom={2} tel={3} mail={4} ", record[0], record[1], record[2], record[3], record[4]);
                             Profil profil = new Profil((int)record[5], (string)record[6]);
                             Developpeur developpeur = new Developpeur((int)record[0], (string)record[1], (string)record[2],
                                 (string)record[3], (string)record[4], profil);
@@ -85,6 +90,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.GetLesDeveloppeurs catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
@@ -109,6 +115,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.DelDepveloppeur catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
@@ -138,6 +145,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.AddDeveloppeur catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
@@ -167,6 +175,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.UpdateDeveloppeur catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
@@ -192,6 +201,7 @@ namespace Habilitations.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.UpdatePwd catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
