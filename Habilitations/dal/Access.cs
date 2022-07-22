@@ -1,6 +1,7 @@
 ﻿using Habilitations.bddmanager;
 using System;
 using Serilog;
+using System.Configuration;
 
 namespace Habilitations.dal
 {
@@ -10,9 +11,9 @@ namespace Habilitations.dal
     public class Access
     {
         /// <summary>
-        /// chaine de connexion à la bdd
+        /// nom de connexion à la bdd
         /// </summary>
-        private static readonly string connectionString = "server=localhost;user id=habilitations;password=motdepasseuser;database=habilitations;SslMode=none";
+        private static readonly string connectionName = "Habilitations.Properties.Settings.habilitationsConnectionString";
         /// <summary>
         /// instance unique de la classe
         /// </summary>
@@ -28,6 +29,7 @@ namespace Habilitations.dal
         /// </summary>
         private Access()
         {
+            String connectionString = null;
             try
             {
                 Log.Logger = new LoggerConfiguration()
@@ -35,6 +37,7 @@ namespace Habilitations.dal
                     .WriteTo.Console()
                     .WriteTo.File("logs/log.txt")
                     .CreateLogger();
+                connectionString = GetConnectionStringByName(connectionName);
                 Manager = BddManager.GetInstance(connectionString);
             }
             catch (Exception e)
@@ -55,6 +58,20 @@ namespace Habilitations.dal
                 instance = new Access();
             }
             return instance;
+        }
+
+        /// <summary>
+        /// Récupération de la chaîne de connexion
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        static string GetConnectionStringByName(string name)
+        {
+            string returnValue = null;
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings[name];
+            if (settings != null)
+                returnValue = settings.ConnectionString;
+            return returnValue;
         }
 
     }

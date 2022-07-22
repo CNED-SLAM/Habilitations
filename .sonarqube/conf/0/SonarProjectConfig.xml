@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SonarProjectConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
+  <AnalysisConfigPath>G:\Mes cours\CNED POITIERS\applications\B2.1\B2.1 SQ4 S2 Habilitations\Habilitations\.sonarqube\conf\SonarQubeAnalysisConfig.xml</AnalysisConfigPath>
+  <ProjectPath>G:\Mes cours\CNED POITIERS\applications\B2.1\B2.1 SQ4 S2 Habilitations\Habilitations\Habilitations\Habilitations.csproj</ProjectPath>
+  <FilesToAnalyzePath>G:\Mes cours\CNED POITIERS\applications\B2.1\B2.1 SQ4 S2 Habilitations\Habilitations\.sonarqube\conf\0\FilesToAnalyze.txt</FilesToAnalyzePath>
+  <OutPath>G:\Mes cours\CNED POITIERS\applications\B2.1\B2.1 SQ4 S2 Habilitations\Habilitations\.sonarqube\out\0</OutPath>
+  <ProjectType>Product</ProjectType>
+</SonarProjectConfig>

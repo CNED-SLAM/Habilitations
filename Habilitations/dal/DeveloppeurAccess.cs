@@ -36,10 +36,12 @@ namespace Habilitations.dal
             {
                 string req = "select * from developpeur d join profil p on d.idprofil=p.idprofil ";
                 req += "where d.nom=@nom and d.prenom=@prenom and pwd=SHA2(@pwd, 256) and p.nom='admin';";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@nom", admin.Nom);
-                parameters.Add("@prenom", admin.Prenom);
-                parameters.Add("@pwd", admin.Pwd);
+                Dictionary<string, object> parameters = new Dictionary<string, object> { 
+                    { "@nom", admin.Nom }, 
+                    { "@prenom", admin.Prenom }, 
+                    { "@pwd", admin.Pwd } 
+                };
+
                 try
                 {
                     List<Object[]> records = access.Manager.ReqSelect(req, parameters);
@@ -106,8 +108,9 @@ namespace Habilitations.dal
             if (access.Manager != null)
             {
                 string req = "delete from developpeur where iddeveloppeur = @iddeveloppeur;";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@iddeveloppeur", developpeur.Iddeveloppeur);
+                Dictionary<string, object> parameters = new Dictionary<string, object> {
+                    {"@iddeveloppeur", developpeur.Iddeveloppeur }
+                };
                 try
                 {
                     access.Manager.ReqUpdate(req, parameters);
@@ -131,15 +134,17 @@ namespace Habilitations.dal
             {
                 string req = "insert into developpeur(nom, prenom, tel, mail, pwd, idprofil) ";
                 req += "values (@nom, @prenom, @tel, @mail, SHA2(@pwd, 256), @idprofil);";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@nom", developpeur.Nom);
-                parameters.Add("@prenom", developpeur.Prenom);
-                parameters.Add("@tel", developpeur.Tel);
-                parameters.Add("@mail", developpeur.Mail);
-                parameters.Add("@pwd", developpeur.Nom);
-                parameters.Add("@idprofil", developpeur.Profil.Idprofil);
-                try
-                {
+                Dictionary<string, object> parameters = new Dictionary<string, object> {
+                    { "@nom", developpeur.Nom },
+                    { "@prenom", developpeur.Prenom },
+                    { "@tel", developpeur.Tel },
+                    { "@mail", developpeur.Mail },
+                    { "@pwd", developpeur.Nom },
+                    { "@idprofil", developpeur.Profil.Idprofil }
+                };
+
+            try
+            {
                     access.Manager.ReqUpdate(req, parameters);
                 }
                 catch (Exception e)
@@ -161,13 +166,14 @@ namespace Habilitations.dal
             {
                 string req = "update developpeur set nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idprofil = @idprofil ";
                 req += "where iddeveloppeur = @iddeveloppeur;";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@idDeveloppeur", developpeur.Iddeveloppeur);
-                parameters.Add("@nom", developpeur.Nom);
-                parameters.Add("@prenom", developpeur.Prenom);
-                parameters.Add("@tel", developpeur.Tel);
-                parameters.Add("@mail", developpeur.Mail);
-                parameters.Add("idprofil", developpeur.Profil.Idprofil);
+                Dictionary<string, object> parameters = new Dictionary<string, object> {
+                    { "@idDeveloppeur", developpeur.Iddeveloppeur },
+                    { "@nom", developpeur.Nom },
+                    { "@prenom", developpeur.Prenom },
+                    { "@tel", developpeur.Tel },
+                    { "@mail", developpeur.Mail },
+                    { "idprofil", developpeur.Profil.Idprofil }
+                };
                 try
                 {
                     access.Manager.ReqUpdate(req, parameters);
@@ -191,9 +197,10 @@ namespace Habilitations.dal
             {
                 string req = "update developpeur set pwd = SHA2(@pwd, 256) ";
                 req += "where iddeveloppeur = @iddeveloppeur;";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@idDeveloppeur", developpeur.Iddeveloppeur);
-                parameters.Add("@pwd", developpeur.Pwd);
+                Dictionary<string, object> parameters = new Dictionary<string, object> {
+                    { "@idDeveloppeur", developpeur.Iddeveloppeur },
+                    { "@pwd", developpeur.Pwd }
+                };
                 try
                 {
                     access.Manager.ReqUpdate(req, parameters);

@@ -18,11 +18,11 @@ namespace Habilitations.view
         /// <summary>
         /// Objet pour gérer la liste des développeurs
         /// </summary>
-        private BindingSource bdgDeveloppeurs = new BindingSource();
+        private readonly BindingSource bdgDeveloppeurs = new BindingSource();
         /// <summary>
         /// Objet pour gérer la liste des profils
         /// </summary>
-        private BindingSource bdgProfils = new BindingSource();
+        private readonly BindingSource bdgProfils = new BindingSource();
         /// <summary>
         /// Controleur de la fenêtre
         /// </summary>
