@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Habilitations", "Habilitati
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupHabilitations", "SetupHabilitations\SetupHabilitations.vdproj", "{8563DFCA-ECB8-4E60-8360-DCFE3A8ACBB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabilitationsTests", "HabilitationsTests\HabilitationsTests.csproj", "{138BEEE5-6C1C-4334-A671-95FC65DFFD6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8563DFCA-ECB8-4E60-8360-DCFE3A8ACBB5}.Debug|Any CPU.Build.0 = Debug
 		{8563DFCA-ECB8-4E60-8360-DCFE3A8ACBB5}.Release|Any CPU.ActiveCfg = Release
 		{8563DFCA-ECB8-4E60-8360-DCFE3A8ACBB5}.Release|Any CPU.Build.0 = Release
+		{138BEEE5-6C1C-4334-A671-95FC65DFFD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138BEEE5-6C1C-4334-A671-95FC65DFFD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138BEEE5-6C1C-4334-A671-95FC65DFFD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138BEEE5-6C1C-4334-A671-95FC65DFFD6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

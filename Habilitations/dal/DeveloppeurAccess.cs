@@ -142,9 +142,8 @@ namespace Habilitations.dal
                     { "@pwd", developpeur.Nom },
                     { "@idprofil", developpeur.Profil.Idprofil }
                 };
-
-            try
-            {
+                try
+                {
                     access.Manager.ReqUpdate(req, parameters);
                 }
                 catch (Exception e)

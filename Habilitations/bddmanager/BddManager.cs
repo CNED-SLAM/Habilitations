@@ -43,9 +43,19 @@ namespace Habilitations.bddmanager
         }
 
         /// <summary>
-        /// Exécution d'une requête autre que "select"
+        /// Exécution d'une requête de type LCT (begin transaction...)
         /// </summary>
-        /// <param name="stringQuery">requête autre que select</param>
+        /// <param name="stringQuery">requête</param>
+        public void ReqControle(string stringQuery)
+        {
+            MySqlCommand command = new MySqlCommand(stringQuery, connection);
+            command.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Exécution d'une requête de type LMD (insert, update, delete)
+        /// </summary>
+        /// <param name="stringQuery">requête</param>
         /// <param name="parameters">dictionnire contenant les parametres</param>
         public void ReqUpdate(string stringQuery, Dictionary<string, object> parameters = null)
         {
@@ -62,9 +72,9 @@ namespace Habilitations.bddmanager
         }
 
         /// <summary>
-        /// Execution d'une requête de type "select"
+        /// Execution d'une requête de type LID (select)
         /// </summary>
-        /// <param name="stringQuery">requête select</param>
+        /// <param name="stringQuery">requête</param>
         /// <param name="parameters">dictoinnaire contenant les parametres</param>
         /// <returns>liste de tableaux d'objets contenant les valeurs des colonnes</returns>
         public List<Object[]> ReqSelect(string stringQuery, Dictionary<string, object> parameters = null)
