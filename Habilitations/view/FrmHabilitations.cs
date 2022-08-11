@@ -27,6 +27,10 @@ namespace Habilitations.view
         /// Controleur de la fenêtre
         /// </summary>
         private FrmHabilitationsController controller;
+        /// <summary>
+        /// profil particulier "admin" qui ne peut pas être supprimé
+        /// </summary>
+        private const string ADMIN = "admin";
 
         /// <summary>
         /// construction des composants graphiques et appel des autres initialisations
@@ -89,6 +93,8 @@ namespace Habilitations.view
                 txtTel.Text = developpeur.Tel;
                 txtMail.Text = developpeur.Mail;
                 cboProfil.SelectedIndex = cboProfil.FindStringExact(developpeur.Profil.Nom);
+                // le profil peut être changé que si ce n'est pas un admin
+                cboProfil.Enabled = !developpeur.Profil.Equals(ADMIN);
             }
             else
             {
@@ -106,7 +112,12 @@ namespace Habilitations.view
             if (dgvDeveloppeurs.SelectedRows.Count > 0)
             {
                 Developpeur developpeur = (Developpeur)bdgDeveloppeurs.List[bdgDeveloppeurs.Position];
-                if (MessageBox.Show("Voulez-vous vraiment supprimer " + developpeur.Nom + " " + developpeur.Prenom + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (developpeur.Profil.Equals(ADMIN))
+                {
+                    MessageBox.Show("Un admin ne peut pas être supprimé", "Information");
+                }
+                else if (MessageBox.Show("Voulez-vous vraiment supprimer " + developpeur.Nom + " " + developpeur.Prenom + " ?", 
+                    "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     controller.DelDeveloppeur(developpeur);
                     RemplirListeDeveloppeurs();
@@ -255,5 +266,55 @@ namespace Habilitations.view
             txtPwd2.Text = "";
         }
 
+        /// <summary>
+        /// Demande de suppression d'un profil
+        /// à condition que ce ne soit pas le profil "admin"
+        /// et qu'il ne soit pas attribué
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnDelProfil_Click(object sender, EventArgs e)
+        {
+            Profil profil = (Profil)bdgProfils.List[bdgProfils.Position];
+            if (profil.Nom.Equals(ADMIN))
+            {
+                MessageBox.Show("Le profil 'admin' ne peut pas être supprimé", "Information");
+            }
+            else if (((List<Developpeur>)bdgDeveloppeurs.DataSource).Exists(x => x.Profil.Idprofil == profil.Idprofil))
+            {
+                MessageBox.Show("Le profil "+profil.Nom+" ne peut pas être supprimé car il est utilisé");
+            }
+            else if (MessageBox.Show("Voulez-vous vraiment supprimer " + profil.Nom + " ?",
+                    "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                controller.DelProfil(profil);
+                RemplirListeProfils();
+            }
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'un profil
+        /// à condition qu'il n'existe pas déjà
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddProfil_Click(object sender, EventArgs e)
+        {
+            string nom = txtProfil.Text.ToString().ToLower();
+            if (string.IsNullOrEmpty(nom))
+            {
+                MessageBox.Show("Saisir un profil", "Information");
+            }
+            else if (cboProfil.Items.Contains(nom))
+            {
+                MessageBox.Show("Profil déjà présent dans la liste", "Information");
+            }
+            else
+            {
+                controller.AddProfil(new Profil(0, nom));
+                txtProfil.Text = "";
+                RemplirListeProfils();
+            }
+        }
     }
 }

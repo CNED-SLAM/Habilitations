@@ -56,6 +56,24 @@ namespace Habilitations.controller
         }
 
         /// <summary>
+        /// Demande de suppression d'un profil
+        /// </summary>
+        /// <param name="profil">objet profil à supprimer</param>
+        public void DelProfil(Profil profil)
+        {
+            profilAccess.DelProfil(profil);
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'un profil 
+        /// </summary>
+        /// <param name="profil"></param>
+        public void AddProfil(Profil profil)
+        {
+            profilAccess.AddProfil(profil);
+        }
+
+        /// <summary>
         /// Demande d'ajout d'un développeur
         /// </summary>
         /// <param name="developpeur">objet developpeur à ajouter</param>

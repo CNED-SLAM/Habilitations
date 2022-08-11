@@ -57,5 +57,55 @@ namespace Habilitations.dal
             return lesProfils;
         }
 
+        /// <summary>
+        /// Suppression d'un profil
+        /// </summary>
+        /// <param name="profil"></param>
+        public void DelProfil(Profil profil)
+        {
+            if (access.Manager != null)
+            {
+                string req = "delete from profil where idprofil = @idprofil;";
+                Dictionary<string, object> parameters = new Dictionary<string, object> {
+                    { "@idprofil", profil.Idprofil }
+                };
+                try
+                {
+                    access.Manager.ReqUpdate(req, parameters);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("ProfilAccess.DelProfil catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Ajout d'un profil
+        /// </summary>
+        /// <param name="profil"></param>
+        public void AddProfil(Profil profil)
+        {
+            if (access.Manager != null)
+            {
+                string req = "insert into profil (nom) values (@nom);";
+                Dictionary<string, object> parameters = new Dictionary<string, object> {
+                    { "@nom", profil.Nom }
+                };
+                try
+                {
+                    access.Manager.ReqUpdate(req, parameters);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.AddDeveloppeur catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
     }
 }
